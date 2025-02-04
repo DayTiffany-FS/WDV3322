@@ -27,8 +27,12 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ['style-loader', 'css-loader', 'sass-loader', 'resolve-url-loader'],
       },
+      {
+        test: /\.json$/,
+        type: 'json' // Enables JSON imports in Webpack 5
+      },      
     ],
   },
   plugins: [

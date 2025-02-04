@@ -11,8 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
     makeDropdown.disabled = true;
     modelDropdown.disabled = true;
 
+    // Reset year dropdown before populating
+    yearDropdown.innerHTML = '<option>Select Year</option>';
+
     // Extract unique years and sort them in descending order
-    const uniqueYears = [...new Set(carData.map(car => car.year))].sort((a, b) => b - a);
+    const uniqueYears = [...new Set(carData.map(car => Number(car.year)))].sort((a, b) => b - a);
 
     // Populate Year Dropdown
     uniqueYears.forEach(year => {
@@ -31,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let filteredMakes = [...new Set(carData.filter(car => car.year == selectedYear).map(car => car.Manufacturer))];
 
         // Sort alphabetically
-        filteredMakes.sort();
+        filteredMakes.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
 
         filteredMakes.forEach(make => {
             let option = document.createElement('option');
@@ -59,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         )];
 
         // Sort alphabetically
-        filteredModels.sort();
+        filteredModels.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
 
         filteredModels.forEach(model => {
             let option = document.createElement('option');

@@ -1,24 +1,54 @@
 // Imports your SCSS stylesheet
 import '@/styles/index.scss';
 
-// select all cards
+// Select all cards
 const cards: NodeListOf<HTMLElement> = document.querySelectorAll('.card');
 
-// tracking of cards and attempts
+// Tracking of cards and attempts
 let flippedCards: HTMLElement[] = [];
 let attemptsLeft: number = 3;
 let matchedPairs: number = 0;
 
-// attempt display update
+// Create deck with values (1-10, J, Q, K, A)
+const cardValues: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+
+// Generate 3 pairs of cards function
+function generateRandomPairs() {
+    let deck: string[] = [];
+    let pairsNeeded = 3;
+
+    // Pick 3 pairs randomly (ensuring 2 identical cards per pair)
+    while (pairsNeeded > 0) {
+        const value = cardValues[Math.floor(Math.random() * cardValues.length)];
+        // Ensure there are only 2 identical cards per pair
+        if (deck.filter(card => card === value).length < 2) {
+            deck.push(value);
+            deck.push(value); // Add second card for the pair
+            pairsNeeded--;
+        }
+    }
+
+    // Shuffle the deck to randomize the pairs' positions
+    deck = deck.sort(() => Math.random() - 0.5);
+    return deck;
+}
+
+// Assign values to cards
+const shuffledValues = generateRandomPairs();
+cards.forEach((card, index) => {
+    card.dataset.value = shuffledValues[index];
+});
+
+// Attempt display update
 const attemptsElement = document.getElementById("attempts") as HTMLElement;
 attemptsElement.textContent = attemptsLeft.toString();
 
-// card event listeners
+// Card event listeners
 cards.forEach((card) => {
     card.addEventListener("click", () => handleCardClick(card));
 });
 
-// card click function
+// Card click function
 function handleCardClick(card: HTMLElement): void {
     if (flippedCards.length < 2 && !card.classList.contains("revealed")) {
         card.classList.add("revealed");
@@ -31,7 +61,7 @@ function handleCardClick(card: HTMLElement): void {
     }
 }
 
-// card match function
+// Card match function
 function checkMatch(): void {
     const [card1, card2] = flippedCards;
 
@@ -59,10 +89,10 @@ function checkMatch(): void {
     flippedCards = [];
 }
 
-// restart button function
+// Restart button function
 document.getElementById("restart")?.addEventListener("click", resetGame);
 
-// reset game function
+// Reset game function
 function resetGame(): void {
     flippedCards = [];
     attemptsLeft = 3;
@@ -73,5 +103,11 @@ function resetGame(): void {
     cards.forEach((card) => {
         card.classList.remove("revealed");
         card.textContent = "";
+    });
+
+    // Re-generate and shuffle the pairs
+    const newShuffledValues = generateRandomPairs();
+    cards.forEach((card, index) => {
+        card.dataset.value = newShuffledValues[index];
     });
 }

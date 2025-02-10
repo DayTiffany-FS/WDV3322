@@ -6,6 +6,25 @@
   <title>Card Match</title>
 </head>
 <body>
+  <div class = "game-container">
+
+    <h1 class = "title">Card Match Game</h1>
+    <p>Match 3 pairs of cards in two attempts.</p>
+
+    <h2 class = "attempts">Attempts Left: <span id = "attempts"></span></h2>
+
+    <div class = "card-grid">
+      <div class = "card" data-value= "A"></div>
+      <div class = "card" data-value= "B"></div>
+      <div class = "card" data-value= "C"></div>
+      <div class = "card" data-value= "A"></div>
+      <div class = "card" data-value= "B"></div>
+      <div class = "card" data-value= "C"></div>
+    </div>
+
+    <p id = "message"></p>
+    <button id = "restart">Start Over!</button>
+  </div>
   <script src="bundle.js"></script>
 </body>
 </html>

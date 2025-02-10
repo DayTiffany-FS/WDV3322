@@ -1,3 +1,72 @@
 html {
-  background: #2364AA;
+  background: #6290C3;
+  color: #FAF2EE;
+  text-align: center;
+}
+
+body {
+  font-family: Copperplate, Fantasy;
+  color: white;
+}
+
+h1, h2 {
+  color: #FB4B4E;
+  text-shadow: 
+        1px 1px 0 #3FFF32,
+        -1px -1px 0 #3FFF32,
+        1px -1px 0 #3FFF32,
+        -1px 1px 0 #3FFF32;
+}
+
+.title {
+  font-size: 60px;
+  margin-bottom: 0;
+}
+
+.attempts {
+  font-size: 30px;
+}
+
+p {
+  font-size: 20px;
+}
+
+button {
+  background-color: #FB4B4E;
+  color: #000000;
+  font-weight: bold;
+  font-size: 25px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.game-container {
+  margin: 50px auto;
+  max-width: 800px;
+  border-radius: 10px;
+}
+
+.card-grid {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.card {
+  width: 280px;
+  height: 200px;
+  background: url('/src/img/cardBack.jpg') center/cover no-repeat;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+
+  &.revealed {
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: black;
+  }
 }
